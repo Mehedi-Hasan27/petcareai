@@ -119,7 +119,7 @@
         <div class="row g-4 mt-4">
           <!-- Feature 1 - Rescue Request with uniform icon placement -->
           <div class="col-lg-3 col-md-6">
-            <a href="appointment.html" class="text-decoration-none text-dark">
+            <a href="appointment.php" class="text-decoration-none text-dark">
               <div class="card text-center h-100 shadow-sm feature-card">
                 <div class="card-body">
                   <div class="feature-icon mb-3">
@@ -134,7 +134,7 @@
           <!-- Feature 2 -->
           <div class="col-lg-3 col-md-6">
             <a
-              href="manage-patient.html"
+              href="manage-patient.php"
               class="text-decoration-none text-dark"
             >
               <div class="card text-center h-100 shadow-sm feature-card">
@@ -151,7 +151,7 @@
           <!-- Feature 3 -->
           <div class="col-lg-3 col-md-6">
             <a
-              href="search-patient.html"
+              href="search-patient.php"
               class="text-decoration-none text-dark"
             >
               <div class="card text-center h-100 shadow-sm feature-card">
@@ -168,7 +168,7 @@
 
           <!-- Feature 4 -->
           <div class="col-lg-3 col-md-6">
-            <a href="vet-article.html" class="text-decoration-none text-dark">
+            <a href="vet-article.php" class="text-decoration-none text-dark">
               <div class="card text-center h-100 shadow-sm feature-card">
                 <div class="card-body">
                   <div class="feature-icon mb-3">

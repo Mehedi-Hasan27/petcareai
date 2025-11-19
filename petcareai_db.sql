@@ -102,6 +102,16 @@ CREATE TABLE doctors (
   FOREIGN KEY (specialization_id) REFERENCES doctor_specializations(id)
 );
 
+-- Vet post --
+CREATE TABLE vet_posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  doctor_name VARCHAR(150) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  image VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- --------------------------------------------------------
 
 -- session_logs --
