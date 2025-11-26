@@ -1,3 +1,34 @@
+<?php
+include 'db_connect.php';
+if(!$conn){
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// For About Our System
+$aboutResult = mysqli_query($conn, "SELECT content FROM about_system WHERE id = 1");
+$aboutData = mysqli_fetch_assoc($aboutResult);
+
+// For Contact
+if(isset($_POST['submit'])){
+    $fullname = $_POST['fullname'];
+    $emailid = $_POST['emailid'];
+    $mobileno = $_POST['mobileno'];
+    $description = $_POST['description'];
+
+    $sql = "INSERT INTO query (fullname, emailid, mobileno, description)
+            VALUES ('$fullname', '$emailid', '$mobileno', '$description')";
+
+    if(mysqli_query($conn, $sql)){
+        echo "<script>alert('Your message has been sent successfully!');</script>";
+    } else {
+        echo "<script>alert('Error: Could not send.');</script>";
+    }
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -317,7 +348,7 @@
     <div class="col-md-6">
       <h2 class="section-title">About Our System</h2>
       <p>
-        PetCareAI is designed to manage animal health information. It helps pet owners connect with doctors, buy medicine, request rescue, and track treatment history. It combines traditional care with modern AI-based support. Our system is user-friendly, responsive, and scalable.
+        <?php echo $aboutData['content']; ?>
       </p>
     </div>
     

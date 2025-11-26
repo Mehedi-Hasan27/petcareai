@@ -1,3 +1,29 @@
+<?php
+include 'db_connect.php';
+
+if(!$conn){
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+// Handle form submission
+if(isset($_POST['submit'])){
+    $title = $_POST['pageTitle'];
+    $description = $_POST['pageDescription'];
+
+    // Update the row with id=1
+    $sql = "UPDATE about_system SET content='$description' WHERE id=1";
+
+    if(mysqli_query($conn, $sql)){
+        $msg = "Updated successfully!";
+    } else {
+        $msg = "Error updating: " . mysqli_error($conn);
+    }
+}
+
+// Fetch current content
+$result = mysqli_query($conn, "SELECT content FROM about_system WHERE id=1");
+$about = mysqli_fetch_assoc($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,28 +33,11 @@
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      background-color: #f8f9fa;
-      font-family: 'Poppins', sans-serif;
-    }
-    .card {
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-    }
-    .btn-custom {
-      background-color: #007bff;
-      border: none;
-      font-weight: 500;
-      padding: 10px 20px;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
-    .btn-custom:hover {
-      background-color: #0056b3;
-    }
-    label {
-      font-weight: 600;
-    }
+    body { background-color: #f8f9fa; font-family: 'Poppins', sans-serif; }
+    .card { border-radius: 15px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); }
+    .btn-custom { background-color: #007bff; border: none; font-weight: 500; padding: 10px 20px; border-radius: 8px; transition: 0.3s; }
+    .btn-custom:hover { background-color: #0056b3; }
+    label { font-weight: 600; }
   </style>
 </head>
 <body>
@@ -47,37 +56,37 @@
     </div>
   </nav>
 
-
-
   <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="col-lg-8">
       <div class="card p-4">
         <h3 class="text-center mb-4">Admin - About Us</h3>
-        <form>
+
+        <?php if(isset($msg)) { ?>
+          <div class="alert alert-success"><?php echo $msg; ?></div>
+        <?php } ?>
+
+        <form method="post">
           <!-- Page Title -->
           <div class="mb-3">
             <label for="pageTitle" class="form-label">Page Title</label>
-            <input type="text" class="form-control" id="pageTitle" placeholder="Enter page title" value="About Our System">
+            <input type="text" class="form-control" id="pageTitle" name="pageTitle" value="About Our System">
           </div>
 
           <!-- Page Description -->
           <div class="mb-3">
             <label for="pageDescription" class="form-label">Page Description</label>
-            <textarea class="form-control" id="pageDescription" rows="7" placeholder="Write page description here...">
-PetCareAI is designed to manage animal health information. It helps pet owners connect with doctors, buy medicine, request rescue, and track treatment history. It combines traditional care with modern AI-based support. Our system is user-friendly, responsive, and scalable.
-            </textarea>
+            <textarea class="form-control" id="pageDescription" name="pageDescription" rows="7"><?php echo $about['content']; ?></textarea>
           </div>
 
           <!-- Submit -->
           <div class="d-grid">
-            <button type="submit" class="btn btn-custom">Submit</button>
+            <button type="submit" name="submit" class="btn btn-custom">Submit</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

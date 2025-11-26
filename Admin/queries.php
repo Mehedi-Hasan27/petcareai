@@ -1,5 +1,17 @@
+<?php
+include 'db_connect.php';
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+// Fetch all queries
+$result = mysqli_query($conn, "SELECT * FROM query ORDER BY id DESC");
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +36,7 @@
       background: #fff;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     table {
@@ -48,7 +60,7 @@
 
     tbody tr:hover {
       transform: translateY(-3px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
     tbody td {
@@ -67,9 +79,9 @@
     .action-btn.view {
       background-color: #17a2b8;
     }
-
   </style>
 </head>
+
 <body>
 
   <!-- Navbar -->
@@ -87,62 +99,42 @@
     </div>
   </nav>
 
-<div class="container">
-  <h1>Admin | Queries</h1>
+  <div class="container">
+    <h1>Admin | Queries</h1>
 
-  <div class="table-responsive">
-    <table class="table align-middle">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Contact No.</th>
-          <th>Message</th>
-          <th>Query Date</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Hridoy Hasan</td>
-          <td>hridoy@gmail.com</td>
-          <td>+880123456789</td>
-          <td>How can I book a vet appointment?</td>
-          <td>2025-08-15</td>
-          <td>
-            <button class="action-btn view">Action</button>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Mehedi Hasan</td>
-          <td>mehedi@gmail.com</td>
-          <td>+880198765432</td>
-          <td>Do you offer emergency pet care?</td>
-          <td>2025-08-14</td>
-          <td>
-            <button class="action-btn view">Action</button>
-          </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Saleh Ahmed Honour</td>
-          <td>honour@gmail.com</td>
-          <td>+880176543210</td>
-          <td>What is the cost of vaccinations?</td>
-          <td>2025-08-13</td>
-          <td>
-            <button class="action-btn view">Action</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact No.</th>
+            <th>Message</th>
+            <th>Query Date & Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $sl = 1;
+          while ($row = mysqli_fetch_assoc($result)) { ?>
+            <tr>
+              <td><?php echo $sl++; ?></td>
+              <td><?php echo $row['fullname']; ?></td>
+              <td><?php echo $row['emailid']; ?></td>
+              <td><?php echo $row['mobileno']; ?></td>
+              <td><?php echo $row['description']; ?></td>
+              <td><?php echo $row['created_at']; ?></td>
+            </tr>
+          <?php } ?>
+        </tbody>
+
+      </table>
+    </div>
   </div>
-</div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

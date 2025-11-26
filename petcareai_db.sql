@@ -125,3 +125,30 @@ CREATE TABLE session_logs (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
   FOREIGN KEY (doctor_id) REFERENCES doctors(id) ON DELETE SET NULL
 );
+
+-- --------------------------------------------------------
+
+-- Query --
+CREATE TABLE query (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  fullname VARCHAR(255),
+  emailid VARCHAR(255),
+  mobileno VARCHAR(50),
+  description TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- --------------------------------------------------------
+
+-- About Our System --
+CREATE TABLE about_system (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  content TEXT NOT NULL,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO about_system (content) VALUES (
+'PetCareAI is designed to manage animal health information. It helps pet owners connect with doctors, buy medicine, request rescue, and track treatment history. It combines traditional care with modern AI-based support. Our system is user-friendly, responsive, and scalable.'
+);
+
+-- --------------------------------------------------------
