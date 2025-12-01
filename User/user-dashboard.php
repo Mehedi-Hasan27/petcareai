@@ -209,24 +209,8 @@ $conn->close();
               </div>
             </a>
           </div>
+          
           <!-- Feature 5 -->
-          <div class="col-lg-3 col-md-6">
-            <a
-              href="medical-history.php"
-              class="text-decoration-none text-dark"
-            >
-              <div class="card text-center h-100 shadow-sm feature-card">
-                <div class="card-body">
-                  <div class="feature-icon mb-3"><i class="bi bi-journal-medical"></i></div>
-                  <h5 class="card-title">Medical History</h5>
-                  <p class="card-text text-muted">
-                     View Medical History.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-          <!-- Feature 6 -->
           <div class="col-lg-3 col-md-6">
             <a href="medicine.php" class="text-decoration-none text-dark">
               <div class="card text-center h-100 shadow-sm feature-card">
@@ -242,7 +226,7 @@ $conn->close();
               </div>
             </a>
           </div>
-          <!-- Feature 7 -->
+          <!-- Feature 6 -->
           <div class="col-lg-3 col-md-6">
             <a href="products.php" class="text-decoration-none text-dark">
               <div class="card text-center h-100 shadow-sm feature-card">
@@ -258,7 +242,7 @@ $conn->close();
               </div>
             </a>
           </div>
-          <!-- Feature 8 -->
+          <!-- Feature 7 -->
           <div class="col-lg-3 col-md-6">
             <a href="vet's-article.php" class="text-decoration-none text-dark">
               <div class="card text-center h-100 shadow-sm feature-card">
@@ -274,7 +258,7 @@ $conn->close();
               </div>
             </a>
           </div>
-          <!-- Feature 9 -->
+          <!-- Feature 8 -->
           <div class="col-lg-3 col-md-6">
             <a href="contact-vet.php" class="text-decoration-none text-dark">
               <div class="card text-center h-100 shadow-sm feature-card">
@@ -290,7 +274,7 @@ $conn->close();
               </div>
             </a>
           </div>
-          <!-- Feature 10 -->
+          <!-- Feature 9 -->
           <div class="col-lg-3 col-md-6">
             <a
               href="animal-adoption.php"
@@ -309,7 +293,7 @@ $conn->close();
               </div>
             </a>
           </div>
-          <!-- Feature 11 -->
+          <!-- Feature 10 -->
           <div class="col-lg-3 col-md-6">
             <a
               href="cutest-pets-contest.php"
@@ -328,7 +312,7 @@ $conn->close();
               </div>
             </a>
           </div>
-          <!-- Feature 12 -->
+          <!-- Feature 11 -->
           <div class="col-lg-3 col-md-6">
             <a
               href="user_post.php"

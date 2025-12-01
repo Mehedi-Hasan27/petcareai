@@ -152,3 +152,25 @@ INSERT INTO about_system (content) VALUES (
 );
 
 -- --------------------------------------------------------
+
+-- Appointments --
+CREATE TABLE appointments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    patient_name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    doctor_id INT NOT NULL,
+    specialization_id INT NOT NULL,
+    appointment_date DATE NOT NULL,
+    symptoms TEXT,
+    serial_number INT DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fees VARCHAR(50),
+    FOREIGN KEY (doctor_id) REFERENCES doctors(id),
+    FOREIGN KEY (specialization_id) REFERENCES doctor_specializations(id)
+);
+
+
+-- --------------------------------------------------------

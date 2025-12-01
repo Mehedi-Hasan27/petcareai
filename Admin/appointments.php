@@ -1,111 +1,55 @@
+<?php
+include 'db_connect.php';
+
+// Fetch all appointments + doctor + specialization
+$sql = "SELECT a.*, d.name AS doctor_name, s.specialization_name
+        FROM appointments a
+        JOIN doctors d ON a.doctor_id = d.id
+        JOIN doctor_specializations s ON a.specialization_id = s.id
+        ORDER BY a.id DESC";
+
+$result = $conn->query($sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User | Appointment History</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f8f9fa;
-      
-    }
+  <title>Admin | Appointment History</title>
 
-    h1 {
-      font-weight: 600;
-      margin-bottom: 30px;
-      color: #333;
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; background-color: #f8f9fa; }
+    h1 { font-weight: 600; margin-bottom: 30px; color: #333; }
 
     .table-responsive {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
+      background: #fff; padding: 20px; border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0 10px;
-    }
-
-
-    tbody tr {
-      background: #f1f3f5;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    tbody tr:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    tbody td {
-      padding: 12px;
-      vertical-align: middle;
-    }
-
-    .status {
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      color: #fff;
-      display: inline-block;
-    }
-
-    .status-confirmed {
-      background-color: #28a745;
-    }
-
-    .status-pending {
-      background-color: #ffc107;
-      color: #212529;
-    }
-
-    .status-cancelled {
-      background-color: #dc3545;
-    }
-
-    .action-btn {
-      font-size: 0.9rem;
-      padding: 6px 12px;
-      border-radius: 5px;
-    }
-
-    .action-btn.view {
-      background-color: #17a2b8;
-      color: #fff;
-      border: none;
-    }
-
-    .action-btn.cancel {
-      background-color: #dc3545;
-      color: #fff;
-      border: none;
-    }
+    table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+    tbody tr { background: #f1f3f5; transition: 0.2s ease; }
+    tbody tr:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    tbody td { padding: 12px; vertical-align: middle; }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand d-flex align-items-center" href="#"><img src="images/PetCare Logo.jpg" alt="Logo" width="40" height="40" class="me-2">PetCareAI</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="admin-dashboard.php">Dashboard</a></li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="images/PetCare Logo.jpg" width="40" height="40" class="me-2">
+      PetCareAI
+    </a>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="admin-dashboard.php">Dashboard</a></li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
 <div class="container">
   <h1>Admin | Appointment History</h1>
@@ -117,47 +61,52 @@
           <th>#</th>
           <th>Doctor Name</th>
           <th>Patient Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Address</th>
           <th>Specialization</th>
-          <th>Consultancy Fee</th>
-          <th>Appointment Date / Time</th>
-          <th>Appointment Creation Date</th>
-          <th>Current Status</th>
-          <th>Action</th>
+          <th>Fees</th>
+          <th>Appointment Date</th>
+          <th>Symptoms</th>
+          <th>Serial</th>
+          <th>Created At</th>
         </tr>
       </thead>
+
       <tbody>
+        <?php 
+        if ($result->num_rows > 0) {
+            $count = 1;
+            while ($row = $result->fetch_assoc()) {
+        ?>
         <tr>
-          <td>1</td>
-          <td>Dr. John Doe</td>
-          <td>Michael Brown</td>
-          <td>Cardiology</td>
-          <td>$100</td>
-          <td>2025-08-20 / 10:00 AM</td>
-          <td>2025-08-10</td>
-          <td><span class="status status-confirmed">Confirmed</span></td>
-          <td>
-            <button class="action-btn view">View</button>
-          </td>
+          <td><?= $count++ ?></td>
+          <td><?= $row['doctor_name'] ?></td>
+          <td><?= $row['patient_name'] ?></td>
+          <td><?= $row['email'] ?></td>
+          <td><?= $row['phone'] ?></td>
+          <td><?= $row['address'] ?></td>
+          <td><?= $row['specialization_name'] ?></td>
+          <td><?= $row['fees'] ?> Tk</td>
+          <td><?= $row['appointment_date'] ?></td>
+          <td><?= $row['symptoms'] ?></td>
+          <td><?= $row['serial_number'] ?></td>
+          <td><?= $row['created_at'] ?></td>
         </tr>
+        <?php 
+            }
+        } else {
+        ?>
         <tr>
-          <td>2</td>
-          <td>Dr. Sam Wilson</td>
-          <td>Oliver Davis</td>
-          <td>Dental</td>
-          <td>$120</td>
-          <td>2025-08-25 / 11:30 AM</td>
-          <td>2025-08-13</td>
-          <td><span class="status status-cancelled">Cancelled</span></td>
-          <td>
-            <button class="action-btn view">View</button>
-          </td>
+          <td colspan="12" class="text-center text-danger">No Appointments Found!</td>
         </tr>
+        <?php } ?>
       </tbody>
+
     </table>
   </div>
 </div>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

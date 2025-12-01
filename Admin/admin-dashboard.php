@@ -233,9 +233,9 @@
                   <div class="feature-icon mb-3">
                     <i class="bi bi-calendar-check"></i>
                   </div>
-                  <h5 class="card-title">Appointments</h5>
+                  <h5 class="card-title">Appointments History</h5>
                   <p class="card-text text-muted">
-                    Manage and check appointment history.
+                    Check appointment history.
                   </p>
                 </div>
               </div>
@@ -270,23 +270,6 @@
                   <h5 class="card-title">Session Logs</h5>
                   <p class="card-text text-muted">
                     Track activity and login sessions.
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Reports -->
-          <div class="col-lg-3 col-md-6">
-            <a href="reports.php" class="text-decoration-none text-dark">
-              <div class="card text-center h-100 shadow-sm feature-card">
-                <div class="card-body">
-                  <div class="feature-icon mb-3">
-                    <i class="bi bi-bar-chart-line"></i>
-                  </div>
-                  <h5 class="card-title">Reports</h5>
-                  <p class="card-text text-muted">
-                    Generate and view performance reports.
                   </p>
                 </div>
               </div>

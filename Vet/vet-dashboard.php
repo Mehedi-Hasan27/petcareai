@@ -1,3 +1,19 @@
+<?php
+session_start();
+include 'db_connect.php'; // database connection
+
+// Check if doctor is logged in
+if(!isset($_SESSION['doctor_id'])){
+    header("Location: doctor-login.php");
+    exit();
+}
+
+// Doctor name session theke niye asho
+$doctor_name = $_SESSION['doctor_name'];
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -87,7 +103,8 @@
                 aria-expanded="false"
               >
                 <i class="bi bi-person-circle me-2"></i>
-                <span id="navbarUsername">User</span>
+                <span id="navbarUsername"><?php echo htmlspecialchars($doctor_name); ?></span>
+
               </a>
               <ul
                 class="dropdown-menu dropdown-menu-end"
@@ -131,23 +148,7 @@
               </div>
             </a>
           </div>
-          <!-- Feature 2 -->
-          <div class="col-lg-3 col-md-6">
-            <a
-              href="manage-patient.php"
-              class="text-decoration-none text-dark"
-            >
-              <div class="card text-center h-100 shadow-sm feature-card">
-                <div class="card-body">
-                  <div class="feature-icon mb-3">
-                    <i class="bi bi-person-gear"></i>
-                  </div>
-                  <h5 class="card-title">Patients</h5>
-                  <p class="card-text text-muted">Manage Patients</p>
-                </div>
-              </div>
-            </a>
-          </div>
+          
           <!-- Feature 3 -->
           <div class="col-lg-3 col-md-6">
             <a
